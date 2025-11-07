@@ -210,7 +210,7 @@ pub async fn directory_listing(
 
     let path = to_relative(Path::new("."), &path);
     let path = path.as_path();
-    tracing::info!("listing directory: {:?}", path);
+    tracing::debug!("listing directory: {:?}", path);
 
     let entries = ReadDirStream::new(tokio::fs::read_dir(path).await.context(NotFoundSnafu)?)
         .take(state.limit)
