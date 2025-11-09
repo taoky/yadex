@@ -1,0 +1,45 @@
+[Unit]
+Description=Yet Another Directory inDEX
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=notify
+ExecStart=/usr/local/bin/yadex --config /etc/yadex/config.toml
+Restart=on-failure
+RestartSec=1s
+DynamicUser=yes
+ReadOnlyPaths=/etc/yadex /srv/repo
+ProtectSystem=strict
+ProtectHome=yes
+ProtectKernelTunables=yes
+ProtectKernelModules=yes
+ProtectKernelLogs=yes
+ProtectClock=yes
+ProtectControlGroups=yes
+ProtectHostname=yes
+ProtectProc=invisible
+ProcSubset=pid
+PrivateTmp=yes
+PrivateDevices=yes
+PrivateMounts=yes
+NoNewPrivileges=yes
+SystemCallFilter=@basic-io @io-event @signal @process @file-system @network-io
+SystemCallErrorNumber=EPERM
+RestrictSUIDSGID=yes
+RestrictRealtime=yes
+RestrictNamespaces=yes
+LockPersonality=yes
+MemoryDenyWriteExecute=yes
+RestrictAddressFamilies=AF_UNIX AF_INET AF_INET6
+KeyringMode=private
+CapabilityBoundingSet=
+SystemCallArchitectures=native
+PrivateUsers=true
+UMask=0077
+IPAddressDeny=any
+IPAddressAllow=localhost
+PrivateDevices=true
+
+[Install]
+WantedBy=multi-user.target
