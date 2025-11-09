@@ -222,6 +222,9 @@ pub async fn directory_listing(
             Some((d, meta)) => {
                 let name = d.file_name();
                 let displayed_name = name.to_string_lossy();
+                if displayed_name.starts_with('.') {
+                    return None;
+                }
                 Some(DirEntryInfo {
                     is_dir: meta.is_dir(),
                     size: meta.size(),
