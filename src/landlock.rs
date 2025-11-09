@@ -14,11 +14,11 @@ pub fn setup_landlock(cmdline: &Cmdline, config: &Config) -> color_eyre::Result<
     let ruleset = Ruleset::default().handle_access(AccessFs::from_all(ABI::V6))?;
     let mut rules = ruleset
         .create()?
+        .set_compatibility(CompatLevel::HardRequirement)
         .add_rule(PathBeneath::new(
             PathFd::new(&config.service.root)?,
             AccessFs::ReadDir,
-        ))?
-        .set_compatibility(CompatLevel::HardRequirement);
+        ))?;
 
     // Accessing template file
     let index_path = &cmdline
