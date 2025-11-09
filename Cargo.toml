@@ -2,10 +2,16 @@
 name = "yadex"
 version = "0.1.0"
 description = "Yet another index page"
-edition = "2021"
+edition = "2024"
 
 [dependencies]
-axum = { version = "0.8", default-features = false, features = ["http1", "http2", "matched-path", "macros", "tokio"] }
+axum = { version = "0.8", default-features = false, features = [
+    "http1",
+    "http2",
+    "matched-path",
+    "macros",
+    "tokio",
+] }
 chrono = { version = "0.4.39", features = ["serde"] }
 clap = { version = "4.5.24", features = ["derive"] }
 color-eyre = "0.6.3"
@@ -17,8 +23,30 @@ landlock = "0.4.3"
 sd-notify = "0.4.5"
 serde = { version = "1.0.217", features = ["derive"] }
 snafu = { version = "0.8.5", features = ["rust_1_81"] }
-tokio = { version = "1.43.1", features = ["rt", "net", "fs", "macros", "rt-multi-thread"] }
+tokio = { version = "1.43.1", features = [
+    "rt",
+    "net",
+    "fs",
+    "macros",
+    "rt-multi-thread",
+] }
 tokio-stream = { version = "0.1.17", features = ["fs"] }
 tracing = "0.1.41"
 tracing-subscriber = { version = "0.3.20", features = ["env-filter"] }
 urlencoding = "2.1.3"
+
+[package.metadata.deb]
+# forked from kxxt's version and has some modifications
+maintainer = "taoky <taoky@ustclug.org>"
+depends = "$auto"
+section = "web"
+priority = "optional"
+maintainer-scripts = "debian/"
+assets = [
+    ["target/release/yadex", "usr/bin/", "755"],
+    ["etc/config.toml", "etc/yadex/", "644"],
+    ["etc/index.html", "etc/yadex/", "644"],
+    # I can't help user to configure nginx -- provide an example in docs
+    ["contrib/nginx.example.conf", "usr/share/doc/yadex/", "644"],
+]
+systemd-units = { enable = false }
