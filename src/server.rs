@@ -1,21 +1,21 @@
 use std::{
     env::set_current_dir,
     fs, io,
-    os::unix::fs::{chroot, MetadataExt},
+    os::unix::fs::{MetadataExt, chroot},
     path::{Path, PathBuf},
     sync::Arc,
 };
 
 use axum::{
+    Router,
     extract::State,
     http::Uri,
     response::{Html, IntoResponse, Redirect, Response},
     routing::get,
-    Router,
 };
 use chrono::{TimeZone, Utc};
 use futures_util::StreamExt as SExt;
-use handlebars::{handlebars_helper, RenderError};
+use handlebars::{RenderError, handlebars_helper};
 use serde::Serialize;
 use snafu::{ResultExt, Snafu};
 use tokio::{fs::DirEntry, net::TcpListener};

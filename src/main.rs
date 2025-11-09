@@ -3,7 +3,7 @@ use cmdline::Cmdline;
 use config::Config;
 use figment::providers::{Format, Toml};
 use server::{App, Template};
-use tracing_subscriber::{filter::EnvFilter, layer::SubscriberExt, util::SubscriberInitExt, Layer};
+use tracing_subscriber::{Layer, filter::EnvFilter, layer::SubscriberExt, util::SubscriberInitExt};
 
 use crate::landlock::setup_landlock;
 
