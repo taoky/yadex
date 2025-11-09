@@ -5,8 +5,11 @@ use figment::providers::{Format, Toml};
 use server::{App, Template};
 use tracing_subscriber::{filter::EnvFilter, layer::SubscriberExt, util::SubscriberInitExt, Layer};
 
+use crate::landlock::setup_landlock;
+
 mod cmdline;
 mod config;
+mod landlock;
 mod server;
 
 fn init_logging() {
@@ -26,8 +29,7 @@ fn init_logging() {
         .init();
 }
 
-#[tokio::main]
-async fn main() -> color_eyre::Result<()> {
+fn main() -> color_eyre::Result<()> {
     init_logging();
     color_eyre::install()?;
     let cmdline = Cmdline::parse();
@@ -35,6 +37,18 @@ async fn main() -> color_eyre::Result<()> {
     let config: Config = figment::Figment::new()
         .merge(Toml::file(&cmdline.config))
         .extract()?;
+
+    if config.service.security == config::Security::Landlock {
+        setup_landlock(&cmdline, &config)?;
+    }
+
+    let rt = tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .build()?;
+    rt.block_on(run(cmdline, config))
+}
+
+async fn run(cmdline: Cmdline, config: Config) -> color_eyre::Result<()> {
     let template = Template::from_config(&cmdline.config, config.template)?;
     let listener =
         tokio::net::TcpListener::bind((config.network.address, config.network.port)).await?;

@@ -2,6 +2,16 @@ use std::{net::IpAddr, path::PathBuf};
 
 use serde::{Deserialize, Serialize};
 
+#[derive(Serialize, Deserialize, PartialEq)]
+pub enum Security {
+    #[serde(rename = "none")]
+    None,
+    #[serde(rename = "chroot")]
+    Chroot,
+    #[serde(rename = "landlock")]
+    Landlock,
+}
+
 #[derive(Serialize, Deserialize)]
 pub struct Config {
     pub network: NetworkConfig,
@@ -18,12 +28,11 @@ pub struct NetworkConfig {
 #[derive(Serialize, Deserialize)]
 pub struct TemplateConfig {
     pub index_file: PathBuf,
-    pub error_file: PathBuf,
 }
 
 #[derive(Serialize, Deserialize)]
 pub struct ServiceConfig {
     pub limit: u64,
     pub root: PathBuf,
-    pub chroot: bool,
+    pub security: Security,
 }

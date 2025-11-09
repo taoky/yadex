@@ -82,14 +82,6 @@ impl Template {
         registry
             .register_template_string("index", index)
             .context(RegisterSnafu { component: "index" })?;
-        let error_path = config_dir.join(config.error_file);
-        let error = std::fs::read_to_string(&error_path).context(IoSnafu {
-            component: "error",
-            path: error_path,
-        })?;
-        registry
-            .register_template_string("error", error)
-            .context(RegisterSnafu { component: "error" })?;
         registry.register_helper("from_mtimestamp", Box::new(from_mtimestamp_helper));
         registry.register_helper("humanize_size", Box::new(humanize_size_helper));
         Ok(Self { registry })
@@ -110,7 +102,7 @@ impl App {
         template: Template,
     ) -> Result<(), YadexError> {
         let root: &'static Path = Box::leak(Box::<Path>::from(config.root));
-        if config.chroot {
+        if config.security == crate::config::Security::Chroot {
             chroot(root).whatever_context("failed to chroot")?;
             set_current_dir("/").whatever_context("failed to cd into new root")?;
         } else {

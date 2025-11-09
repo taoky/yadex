@@ -13,6 +13,7 @@ figment = { version = "0.10.19", features = ["toml"] }
 futures-util = "0.3.31"
 handlebars = "6.3.0"
 html-escape = "0.2.13"
+landlock = "0.4.3"
 serde = { version = "1.0.217", features = ["derive"] }
 snafu = { version = "0.8.5", features = ["rust_1_81"] }
 tokio = { version = "1.43.1", features = ["rt", "net", "fs", "macros", "rt-multi-thread"] }

@@ -1,15 +1,16 @@
 [network]
-address = "0.0.0.0"
+address = "127.0.0.1"
 port = 8880
 
 [template]
 index_file = "index.html"
-error_file = "error.html"
 
 [service]
 limit = 50
 root = "."
-# Note: When chroot is false, yadex WILL NOT check if the requested path will finally be resolved inside the root directory.
-# An example is a symlink that points outside the root directory.
-# Use docker, systemd, bwrap, or other sandboxing tools to enforce filesystem isolation if you don't want chroot(2).
-chroot = false
+# Supports following values: "none", "chroot", "landlock"
+# "chroot" requires root privileges to run the server.
+# "landlock" requires newer kernel but don't need root privileges.
+# When set to "none", yadex can not make sure that users can not access files outside the root directory.
+# For example, a symlink pointing outside the root directory can be accessed.
+security = "landlock"
