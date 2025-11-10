@@ -3,6 +3,7 @@ name = "yadex"
 version = "0.1.0"
 description = "Yet another index page"
 edition = "2024"
+license = "GPL-2.0-or-later"
 
 [dependencies]
 axum = { version = "0.8", default-features = false, features = [
