@@ -32,14 +32,14 @@ Example response (note: entries are not sorted; directory sizes are always 0):
     {
       "name": "hooks",
       "is_dir": true,
-      "size": 556,
+      "size": 0,
       "href": "/.git/hooks/",
       "datetime": 1762543427
     },
     {
       "name": "info",
       "is_dir": true,
-      "size": 14,
+      "size": 0,
       "href": "/.git/info/",
       "datetime": 1762543427
     },
@@ -53,14 +53,14 @@ Example response (note: entries are not sorted; directory sizes are always 0):
     {
       "name": "objects",
       "is_dir": true,
-      "size": 408,
+      "size": 0,
       "href": "/.git/objects/",
-      "datetime": 1762890787
+      "datetime": 1762968018
     },
     {
       "name": "refs",
       "is_dir": true,
-      "size": 32,
+      "size": 0,
       "href": "/.git/refs/",
       "datetime": 1762543429
     },
@@ -74,7 +74,7 @@ Example response (note: entries are not sorted; directory sizes are always 0):
     {
       "name": "logs",
       "is_dir": true,
-      "size": 16,
+      "size": 0,
       "href": "/.git/logs/",
       "datetime": 1762543429
     },
@@ -88,16 +88,16 @@ Example response (note: entries are not sorted; directory sizes are always 0):
     {
       "name": "COMMIT_EDITMSG",
       "is_dir": false,
-      "size": 40,
+      "size": 26,
       "href": "/.git/COMMIT_EDITMSG",
-      "datetime": 1762890785
+      "datetime": 1762968009
     },
     {
       "name": "FETCH_HEAD",
       "is_dir": false,
       "size": 82,
       "href": "/.git/FETCH_HEAD",
-      "datetime": 1762890787
+      "datetime": 1762968018
     },
     {
       "name": "config",
@@ -111,14 +111,14 @@ Example response (note: entries are not sorted; directory sizes are always 0):
       "is_dir": false,
       "size": 1635,
       "href": "/.git/index",
-      "datetime": 1762890785
+      "datetime": 1762968009
     },
     {
       "name": "ORIG_HEAD",
       "is_dir": false,
       "size": 41,
       "href": "/.git/ORIG_HEAD",
-      "datetime": 1762890787
+      "datetime": 1762968018
     }
   ],
   "maybe_truncated": false
