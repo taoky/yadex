@@ -4,6 +4,8 @@ Yet Another inDEX page.
 
 Designed to work with other servers like nginx -- yadex does not serve files, instead it only generates index pages for directories.
 
+Modified from: <https://github.com/kxxt/yadex/>
+
 ## Endpoints
 
 ### Template-rendered index page
