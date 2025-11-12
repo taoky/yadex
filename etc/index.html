@@ -106,7 +106,7 @@
             <a href="{{this.href}}">{{this.name}}{{#if this.is_dir}}/{{/if}}</a>
           </td>
           <td>{{from_mtimestamp this.datetime}}</td>
-          <td title="{{this.size}} bytes">{{humanize_size this.size}}</td>
+          <td title="{{this.size}} bytes">{{#unless this.is_dir}}{{humanize_size this.size}}{{/unless}}</td>
         </tr>
         {{/each}}
       </tbody>

@@ -22,7 +22,7 @@ Enabled with `json_api` config option in `[service]` (default: false). The path 
 }
 ```
 
-Example response (note: entries are not sorted):
+Example response (note: entries are not sorted; directory sizes are always 0):
 
 ```json
 {

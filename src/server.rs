@@ -218,7 +218,7 @@ async fn get_entries(
                 }
                 Some(DirEntryInfo {
                     is_dir: meta.is_dir(),
-                    size: meta.size(),
+                    size: if meta.is_dir() { 0 } else { meta.size() },
                     href: format!(
                         "{href}{slash}",
                         href = path_to_href(&path.join(d.file_name())),
